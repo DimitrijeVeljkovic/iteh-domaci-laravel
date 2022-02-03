@@ -14,7 +14,8 @@ class TitleFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'titleName' => $this->faker->title(),
+            'description' => $this->faker->paragraph()
         ];
     }
 }
