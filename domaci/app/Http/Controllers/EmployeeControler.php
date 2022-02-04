@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use App\Models\Title;
+use App\Models\Employer;
+use App\Http\Resources\EmployeeCollection;
+use App\Http\Resources\EmployeeResources;
 
 class EmployeeControler extends Controller
 {
@@ -14,7 +18,7 @@ class EmployeeControler extends Controller
      */
     public function index()
     {
-        //
+        return new EmployeeCollection(Employee::all());
     }
 
     /**
@@ -46,7 +50,7 @@ class EmployeeControler extends Controller
      */
     public function show(Employee $employee)
     {
-        //
+        return new EmployeeResource($employee);
     }
 
     /**

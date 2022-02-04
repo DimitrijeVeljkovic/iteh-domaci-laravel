@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Title;
 use Illuminate\Http\Request;
+use App\Models\Employee;
+use App\Models\Employer;
+use App\Http\Resources\TitleCollection;
+use App\Http\Resources\TitleResources;
 
 class TitleControler extends Controller
 {
@@ -14,7 +18,7 @@ class TitleControler extends Controller
      */
     public function index()
     {
-        //
+        return new TitleCollection(Title::all());
     }
 
     /**
@@ -46,7 +50,7 @@ class TitleControler extends Controller
      */
     public function show(Title $title)
     {
-        //
+        return new TitleResource($title);
     }
 
     /**
