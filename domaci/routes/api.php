@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeControler;
 use App\Http\Controllers\EmployerControler;
 use App\Http\Controllers\TitleControler;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('employees', EmployeeControler::class);
 Route::resource('employers', EmployerControler::class);
 Route::resource('titles', TitleControler::class);
+Route::resource('users', UserController::class)->only(['index','show']);
