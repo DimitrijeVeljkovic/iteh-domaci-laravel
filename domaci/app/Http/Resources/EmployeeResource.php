@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\TitleCollection;
 
 class EmployeeResource extends JsonResource
 {
@@ -15,13 +16,14 @@ class EmployeeResource extends JsonResource
     public static $wrap = 'employee';
 
     public function toArray($request)
-    {
+    {  
+
         return [
             'name' => $this->resource->name,
             'email' => $this->resource->email,
             'phoneNumber' => $this->resource->phoneNumber,
             'age' => $this->resource->age,
-            'titleId' => $this->resource->titleId
+            'title' => new TitleCollection($this->resource->title),
         ];
     }
 }

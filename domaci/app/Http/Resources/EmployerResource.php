@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\EmployeeCollection;
 
 class EmployerResource extends JsonResource
 {
@@ -19,7 +20,7 @@ class EmployerResource extends JsonResource
         return [
             'name' => $this->resource->name,
             'phoneNumber' => $this->resource->phoneNumber,
-            'employeeId' => $this->resource->employeeId
+            'employee' => new EmployeeCollection($this->resource->employee)
         ];
     }
 }

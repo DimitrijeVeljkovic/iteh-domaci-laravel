@@ -6,6 +6,8 @@ use App\Http\Controllers\EmployeeControler;
 use App\Http\Controllers\EmployerControler;
 use App\Http\Controllers\TitleControler;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EmployerEmployeeController;
+use App\Http\Controllers\EmployeeTitleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +28,5 @@ Route::resource('employees', EmployeeControler::class);
 Route::resource('employers', EmployerControler::class);
 Route::resource('titles', TitleControler::class);
 Route::resource('users', UserController::class)->only(['index','show']);
+Route::resource('employers/{id}/employees', EmployerEmployeeController::class);
+Route::resource('employees/{id}/titles', EmployeeTitleController::class);
