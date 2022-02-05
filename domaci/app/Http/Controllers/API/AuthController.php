@@ -34,7 +34,7 @@ class AuthController extends Controller
             $user->email_verified_at = now();
             $user->save();
 
-            return response()->json(['message' => 'Successfully registered user!', 'data' => $user]);
+            return response()->json(['Successfully registered user!', $user]);
         } else {
             return response()->json('Unauthorized!');
         }
@@ -42,7 +42,7 @@ class AuthController extends Controller
 
     public function login(Request $request) {
         if(!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json(['message' => 'Unauthorized'], 401);
+            return response()->json(['Unauthorized!'], 401);
         }
 
         $user = User::where('email', $request['email'])->firstOrFail();
@@ -55,6 +55,6 @@ class AuthController extends Controller
     public function logout() {
         auth()->user()->tokens()->delete();
 
-        return ['message' => 'Successfully logged out!'];
+        return ['Successfully logged out!'];
     }
 }
