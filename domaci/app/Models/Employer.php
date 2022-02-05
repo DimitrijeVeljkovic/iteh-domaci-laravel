@@ -12,6 +12,6 @@ class Employer extends Model
     public $primaryKey = 'id';
 
     public function employee() {
-        return $this->hasMany(Employee::class, 'id');
+        return $this->hasMany(Employee::class, 'id', 'employeeId');
     }
 }

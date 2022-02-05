@@ -17,6 +17,7 @@ class TitleResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'titleId' => $this->resource->id,
             'titleName' => $this->resource->titleName,
             'description' => $this->resource->description
         ];
