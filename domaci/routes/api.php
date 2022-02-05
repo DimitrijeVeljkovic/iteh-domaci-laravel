@@ -8,6 +8,7 @@ use App\Http\Controllers\TitleControler;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EmployerEmployeeController;
 use App\Http\Controllers\EmployeeTitleController;
+use App\Http\Controllers\API\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +25,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('employees', EmployeeControler::class)->only(['index','store','update', 'destroy']);
-Route::resource('employers', EmployerControler::class);
-Route::resource('titles', TitleControler::class)->only(['index','store','update','destroy']);
+Route::post('login', [AuthController::class, 'login']);
+Route::resource('employees', EmployeeControler::class)->only(['index', 'show']);
+Route::resource('employers', EmployerControler::class)->only(['index', 'show']);
+Route::resource('titles', TitleControler::class)->only(['index','show']);
 Route::resource('users', UserController::class)->only(['index','show']);
 Route::resource('employers/{id}/employees', EmployerEmployeeController::class);
 Route::resource('employees/{id}/titles', EmployeeTitleController::class);
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::resource('employees', EmployeeControler::class)->only(['store', 'destroy', 'update']);
+    Route::resource('titles', TitleControler::class)->only(['store', 'destroy', 'update']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/register', [AuthController::class, 'register']);
+});
