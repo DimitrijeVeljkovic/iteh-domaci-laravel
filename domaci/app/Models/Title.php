@@ -10,6 +10,11 @@ class Title extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'titleName',
+        'description'
+    ];
+
     protected $table = 'titles';
     public $primaryKey = 'id';
 

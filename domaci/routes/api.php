@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('employees', EmployeeControler::class);
 Route::resource('employers', EmployerControler::class);
-Route::resource('titles', TitleControler::class);
+Route::resource('titles', TitleControler::class)->only(['index','store','update','destroy']);
 Route::resource('users', UserController::class)->only(['index','show']);
 Route::resource('employers/{id}/employees', EmployerEmployeeController::class);
 Route::resource('employees/{id}/titles', EmployeeTitleController::class);

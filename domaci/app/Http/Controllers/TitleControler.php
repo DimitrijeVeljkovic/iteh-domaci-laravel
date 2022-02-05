@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Employer;
 use App\Http\Resources\TitleCollection;
-use App\Http\Resources\TitleResources;
+use App\Http\Resources\TitleResource;
+use Illuminate\Support\Facades\Validator;
 
 class TitleControler extends Controller
 {
@@ -39,7 +40,23 @@ class TitleControler extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'titleName' => 'required|string|max:30',
+            'description' => 'required|string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+
+        $title = Title::create([
+            'titleName' => $request->titleName,
+            'description' => $request->description
+        ]);
+
+        $title->save();
+
+        return response()->json(['Title is created successfully.', new TitleResource($title)]);
     }
 
     /**
@@ -73,7 +90,21 @@ class TitleControler extends Controller
      */
     public function update(Request $request, Title $title)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'titleName' => 'required|string|max:30',
+            'description' => 'required|string'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors());
+        }
+
+        $title->titleName = $request->titleName;
+        $title->description = $request->description;
+
+        $title->save();
+
+        return response()->json(['Title is updated successfully!', new TitleResource($title)]);
     }
 
     /**
@@ -84,6 +115,7 @@ class TitleControler extends Controller
      */
     public function destroy(Title $title)
     {
-        //
+        $title->delete();
+        return response()->json('Title is deleted successfully!');
     }
 }
