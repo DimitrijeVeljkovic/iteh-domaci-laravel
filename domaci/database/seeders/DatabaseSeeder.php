@@ -6,6 +6,9 @@ use Illuminate\Database\Seeder;
 use \App\Models\Employee;
 use \App\Models\Employer;
 use \App\Models\Title;
+use \App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +22,18 @@ class DatabaseSeeder extends Seeder
         Employee::truncate();
         Employer::truncate();
         Title::truncate();
+        User::truncate();
+
+        $user1 = User::create([
+            'name'=>'Admin',
+            'email'=>'admin@gmail.com',
+            'password'=>Hash::make('admin'),
+            'email_verified_at'=>now(),
+            'remember_token'=>Str::random(10),
+            'role'=>'Admin'
+        ]);
+
+        User::factory(5)->create();
 
         Title::factory(5)->create();
 
