@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Title;
 use App\Http\Resources\EmployerCollection;
-use App\Http\Resources\EmployeeResources;
+use App\Http\Resources\EmployerResource;
 
 class EmployerControler extends Controller
 {
